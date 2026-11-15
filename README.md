@@ -15,7 +15,7 @@ A beginner-friendly Python project demonstrating file handling, exception handli
 
 <br/>
 
-<a href="https://ahmadshehbaz.github.io/python-files-errors-assessment/">
+<a href="https://ahmadshehbaz.github.io/python-files-errors-assessment/](https://expensetracker-live.vercel.app/">
   <img src="https://img.shields.io/badge/🌐_View_Live_Demo-Click_Here-blue?style=for-the-badge" alt="Live Demo"/>
 </a>
 
