@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Institute Management System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+header {
+    background: #172554;
+    color: white;
+    padding: 25px 7%;
+}
+
+header h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #bfdbfe;
+}
+
+.container {
+    max-width: 1150px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+.card h3 {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.card h2 {
+    color: #1d4ed8;
+    font-size: 27px;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+nav button {
+    border: none;
+    padding: 12px 18px;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+nav button.active,
+nav button:hover {
+    background: #1d4ed8;
+    color: white;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+h2.section-title {
+    margin-bottom: 18px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #2563eb;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.primary:hover {
+    background: #1e40af;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    min-width: 550px;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: #eff6ff;
+    color: #1e40af;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.category-list {
+    margin-top: 15px;
+    line-height: 2;
+}
+
+.result {
+    background: #eff6ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    white-space: pre-line;
+}
+
+.danger {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+    margin-top: 35px;
+}
+
+@media(max-width: 600px) {
+    header h1 {
+        font-size: 22px;
+    }
+
+    .container {
+        margin-top: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏫 Institute Management System</h1>
+    <p>Expense Tracking & Student Attendance Management</p>
+</header>
+
+<div class="container">
+
+    <!-- Dashboard -->
+    <div class="stats">
+
+        <div class="card">
+            <h3>Total Expenses</h3>
+            <h2 id="totalExpense">Rs. 0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Transactions</h3>
+            <h2 id="totalTransactions">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Unique Students</h3>
+            <h2 id="totalStudents">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Expense Categories</h3>
+            <h2 id="totalCategories">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <button class="active" onclick="showSection('dashboard', this)">Dashboard</button>
+        <button onclick="showSection('expenses', this)">Expense Tracker</button>
+        <button onclick="showSection('attendance', this)">Attendance Cleaner</button>
+    </nav>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="section active">
+
+        <div class="card">
+            <h2 class="section-title">Welcome! 👋</h2>
+
+            <p>
+                Welcome to the Institute Management System demo.
+                This website demonstrates two Python-based management
+                applications through an interactive browser interface.
+            </p>
+
+            <br>
+
+            <h3>💰 Expense Tracker</h3>
+            <p>Record expenses, view transactions and calculate category totals.</p>
+
+            <br>
+
+            <h3>🎓 Attendance Cleaner</h3>
+            <p>Clean student names, remove duplicates and sort attendance records.</p>
+
+            <br>
+
+            <p><b>Technologies:</b> Python, HTML, CSS and JavaScript</p>
+        </div>
+
+    </section>
+
+    <!-- Expense Tracker -->
+    <section id="expenses" class="section">
+
+        <div class="card">
+
+            <h2 class="section-title">💰 Expense Tracker</h2>
+
+            <form id="expenseForm">
+
+                <input type="date" id="date" required>
+
+                <input type="text" id="item" placeholder="Item Name" required>
+
+                <input type="text" id="category" placeholder="Category" required>
+
+                <input type="number" id="amount" placeholder="Amount" min="0" step="0.01" required>
+
+                <button class="primary" type="submit">Add Expense</button>
+
+            </form>
+
+            <h3>All Expenses</h3>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="expenseTable"></tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <h3>Category Wise Totals</h3>
+
+            <div id="categoryTotals" class="category-list"></div>
+
+            <br>
+
+            <button class="primary" onclick="downloadExpenses()">Download Expenses CSV</button>
+
+        </div>
+
+    </section>
+
+    <!-- Attendance Cleaner -->
+    <section id="attendance" class="section">
+
+        <div class="card">
+
+            <h2 class="section-title">🎓 Attendance Cleaner</h2>
+
+            <p>Enter student names, one name per line.</p>
+
+            <br>
+
+            <textarea
+                id="studentInput"
+                rows="7"
+                style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:7px;"
+                placeholder="Ali&#10;AHMAD&#10;sara&#10;Ali&#10;Zain">
+            </textarea>
+
+            <br><br>
+
+            <button class="primary" onclick="cleanAttendance()">Clean Attendance</button>
+
+            <div id="attendanceResult" class="result">
+                Your cleaned attendance list will appear here.
+            </div>
+
+            <br>
+
+            <button class="primary" onclick="downloadAttendance()">Download Attendance CSV</button>
+
+        </div>
+
+    </section>
+
+</div>
+
+<footer>
+    <p>🐍 Institute Management System | Python Learning Project</p>
+    <p>Built with HTML, CSS and JavaScript</p>
+</footer>
+
+<script>
+
+// Navigation
+function showSection(sectionId, button) {
+
+    document.querySelectorAll(".section").forEach(section => {
+        section.classList.remove("active");
+    });
+
+    document.querySelectorAll("nav button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    document.getElementById(sectionId).classList.add("active");
+
+    button.classList.add("active");
+}
+
+// Store expenses
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+let cleanedStudents = [];
+
+// Add expense
+document.getElementById("expenseForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const expense = {
+        date: document.getElementById("date").value,
+        item: document.getElementById("item").value.trim(),
+        category: document.getElementById("category").value.trim(),
+        amount: Number(document.getElementById("amount").value)
+    };
+
+    if (expense.amount < 0 || !Number.isFinite(expense.amount)) {
+        alert("Enter a valid amount.");
+        return;
+    }
+
+    expenses.push(expense);
+
+    saveExpenses();
+
+    this.reset();
+
+});
+
+// Save expenses in browser storage
+function saveExpenses() {
+
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+
+    displayExpenses();
+
+}
+
+// Display expenses
+function displayExpenses() {
+
+    const table = document.getElementById("expenseTable");
+
+    table.innerHTML = "";
+
+    expenses.forEach((expense, index) => {
+
+        const row = document.createElement("tr");
+
+        [expense.date, expense.item, expense.category, "Rs. " + expense.amount.toFixed(2)]
+        .forEach(value => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        const actionCell = document.createElement("td");
+        const deleteButton = document.createElement("button");
+
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "danger";
+
+        deleteButton.addEventListener("click", () => {
+            expenses.splice(index, 1);
+            saveExpenses();
+        });
+
+        actionCell.appendChild(deleteButton);
+        row.appendChild(actionCell);
+
+        table.appendChild(row);
+
+    });
+
+    updateDashboard();
+
+    displayCategoryTotals();
+
+}
+
+// Calculate category totals
+function displayCategoryTotals() {
+
+    const totals = {};
+
+    expenses.forEach(expense => {
+
+        if (!totals[expense.category]) {
+            totals[expense.category] = 0;
+        }
+
+        totals[expense.category] += expense.amount;
+
+    });
+
+    const container = document.getElementById("categoryTotals");
+
+    container.innerHTML = "";
+
+    Object.entries(totals).forEach(([category, total]) => {
+
+        const line = document.createElement("p");
+
+        line.textContent = category + ": Rs. " + total.toFixed(2);
+
+        container.appendChild(line);
+
+    });
+
+    if (expenses.length === 0) {
+        container.textContent = "No expenses available.";
+    }
+
+}
+
+// Update dashboard
+function updateDashboard() {
+
+    const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+
+    const categories = new Set(expenses.map(expense => expense.category));
+
+    document.getElementById("totalExpense").textContent = "Rs. " + total.toFixed(2);
+
+    document.getElementById("totalTransactions").textContent = expenses.length;
+
+    document.getElementById("totalCategories").textContent = categories.size;
+
+    document.getElementById("totalStudents").textContent = cleanedStudents.length;
+
+}
+
+// Clean attendance
+function cleanAttendance() {
+
+    const original = document.getElementById("studentInput").value.split("\n");
+
+    const cleaned = original
+        .map(name => name.trim())
+        .filter(name => name.length > 0)
+        .map(name => name.toLowerCase().replace(/\b\w/g, char => char.toUpperCase()));
+
+    cleanedStudents = [...new Set(cleaned)].sort();
+
+    const result = document.getElementById("attendanceResult");
+
+    result.textContent =
+        "Original Records: " + original.filter(name => name.trim()).length +
+        "\nUnique Students: " + cleanedStudents.length +
+        "\n\nCleaned Attendance List:\n" +
+        cleanedStudents.map((name, index) => (index + 1) + ". " + name).join("\n");
+
+    updateDashboard();
+
+}
+
+// Download expense CSV
+function downloadExpenses() {
+
+    const rows = [
+        ["date", "item", "category", "amount"],
+        ...expenses.map(expense => [
+            expense.date,
+            expense.item,
+            expense.category,
+            expense.amount
+        ])
+    ];
+
+    const csv = rows.map(row =>
+        row.map(value => '"' + String(value).replace(/"/g, '""') + '"').join(",")
+    ).join("\n");
+
+    downloadFile(csv, "expenses.csv");
+
+}
+
+// Download attendance CSV
+function downloadAttendance() {
+
+    if (cleanedStudents.length === 0) {
+        alert("Please clean attendance first.");
+        return;
+    }
+
+    const rows = [
+        ["student_name"],
+        ...cleanedStudents.map(name => [name])
+    ];
+
+    const csv = rows.map(row =>
+        row.map(value => '"' + String(value).replace(/"/g, '""') + '"').join(",")
+    ).join("\n");
+
+    downloadFile(csv, "attendance_clean.csv");
+
+}
+
+// Common download function
+function downloadFile(content, filename) {
+
+    const blob = new Blob([content], {
+        type: "text/csv;charset=utf-8;"
+    });
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+
+}
+
+// Load previously saved browser data
+displayExpenses();
+
+</script>
+
+</body>
+</html>
